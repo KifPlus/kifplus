@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIF PLUS — Premium Tobacco & Shisha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0808;
+    --bg-alt: #121010;
+    --surface: rgba(201, 169, 97, 0.05);
+    --surface-2: rgba(201, 169, 97, 0.1);
+    --border: rgba(201, 169, 97, 0.15);
+    --border-strong: rgba(201, 169, 97, 0.3);
+    --text: #f5e6d3;
+    --text-dim: #a89880;
+    --text-mute: #6b5d4f;
+    --gold: #c9a961;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7340;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* custom scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+
+  /* ---------- NAVIGATION ---------- */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+  }
+  .navbar.scrolled {
+    background: rgba(10, 8, 8, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem 3rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  .brand img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    transition: transform 0.8s;
+  }
+  .brand:hover img { transform: rotate(360deg); }
+  .brand span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+
+  .menu {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .menu a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+  .menu a:hover { color: var(--gold); }
+  .menu a:hover::after { width: 100%; }
+
+  .cta-btn {
+    padding: 0.75rem 1.8rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .cta-btn:hover {
+    background: var(--gold);
+    color: var(--bg);
+    box-shadow: 0 10px 30px rgba(201,169,97,0.3);
+  }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/157dbe1e7-1757-4b11-a53a-7b84d498e62e.png') center/cover;
+    filter: brightness(0.5) saturate(1.2);
+    animation: slowZoom 25s ease-in-out infinite alternate;
+  }
+  @keyframes slowZoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,8,8,0.4) 0%, rgba(10,8,8,0.7) 50%, var(--bg) 100%);
+    z-index: 1;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(10,8,8,0.6) 100%);
+    z-index: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    width: 100%;
+  }
+  .hero-logo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 60px rgba(201,169,97,0.3), 0 20px 40px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(201, 169, 97, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+  }
+  .hero-tag .pulse {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--gold);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 900px;
+  }
+  .hero h1 span { display: block; }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .hero p {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    color: var(--text-dim);
+    max-width: 550px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    border: 1px solid;
+  }
+  .btn-gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
+  }
+  .btn-gold:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    box-shadow: 0 15px 40px rgba(201,169,97,0.4);
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--border-strong);
+    color: var(--text);
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-mute);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .scroll-hint .bar {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: growShrink 2s ease-in-out infinite;
+  }
+  @keyframes growShrink {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .ticker {
+    padding: 1.5rem 0;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 4rem;
+    animation: slide 30s linear infinite;
+    width: max-content;
+  }
+  .ticker-track span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--text-mute);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+  .ticker-track .star { color: var(--gold); margin: 0 1rem; }
+  @keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---------- SECTION COMMON ---------- */
+  section { padding: 8rem 3rem; position: relative; }
+  .section-head {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 5rem;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '—';
+    margin: 0 1rem;
+    opacity: 0.4;
+  }
+  .eyebrow.left { text-align: left; }
+  .eyebrow.left::before { display: none; }
+
+  h2.title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  h2.title em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .lead {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .about-visual {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+  .about-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1s;
+  }
+  .about-visual:hover img { transform: scale(1.05); }
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,97,0.15), transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .about-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .about-float {
+    position: absolute;
+    bottom: -2rem; right: -2rem;
+    width: 200px; height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 3px solid var(--bg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    z-index: 3;
+  }
+  .about-float img { width: 100%; height: 100%; object-fit: cover; }
+  .about-float::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid var(--border);
+    pointer-events: none;
+  }
+
+  .about-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+  .about-body h2 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .about-body p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+  }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-mute);
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- CERTS ---------- */
+  .certs-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .cert-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cert-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+  .cert-box:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    background: var(--surface-2);
+  }
+  .cert-box:hover::before { transform: scaleX(1); }
+  .cert-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+    border: 2px solid var(--border);
+    transition: all 0.5s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .cert-box:hover .cert-img {
+    border-color: var(--gold);
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(201,169,97,0.3);
+  }
+  .cert-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+  .cert-box .sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .cert-box p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- PRODUCTS ---------- */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .product {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+  }
+  .product:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  }
+  .product-pic {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    position: relative;
+  }
+  .product-pic img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s;
+  }
+  .product:hover .product-pic img { transform: scale(1.1); }
+  .product-pic::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10,8,8,0.9) 100%);
+  }
+  .product-tag {
+    position: absolute;
+    top: 1.5rem; left: 1.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(10,8,8,0.8);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+  }
+  .product-info { padding: 2rem; }
+  .product-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .product-info p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+  .product-link:hover { gap: 1rem; }
+
+  /* ---------- FEATURED ---------- */
+  .featured {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 21/9;
+    cursor: pointer;
+    border: 1px solid var(--border);
+  }
+  .featured img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 1s;
+  }
+  .featured:hover img { transform: scale(1.05); }
+  .featured-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10,8,8,0.95) 0%, rgba(10,8,8,0.5) 60%, transparent 100%);
+    display: flex;
+    align-items: center;
+    padding: 5rem;
+  }
+  .featured-text { max-width: 550px; }
+  .featured-text .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.2rem;
+  }
+  .featured-text .eyebrow::before { display: none; }
+  .featured-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .featured-text p {
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  /* ---------- MARKETS ---------- */
+  .markets-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .markets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .market-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.5s;
+    position: relative;
+    overflow: hidden;
+  }
+  .market-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+  .market-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    background: var(--surface-2);
+  }
+  .market-card:hover::before { transform: scaleX(1); }
+  .flag {
+    width: 100%;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    transition: all 0.5s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .market-card:hover .flag {
+    transform: scale(1.05);
+    border-color: var(--gold);
+    box-shadow: 0 15px 40px rgba(201,169,97,0.2);
+  }
+  .market-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .market-card .sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  .market-card p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- WHY US ---------- */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .why-card {
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .why-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .why-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-strong);
+    background: var(--surface-2);
+  }
+  .why-card:hover::before { transform: scaleX(1); }
+  .why-icon {
+    width: 56px; height: 56px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+  }
+  .why-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+  .why-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .contact-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.15;
+  }
+  .contact-info h2 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .contact-info > p {
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+  .contact-item:hover {
+    border-color: var(--gold);
+    background: var(--surface-2);
+  }
+  .contact-icon {
+    width: 48px; height: 48px;
+    border-radius: 8px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+  .contact-item h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .contact-item a, .contact-item span {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .contact-item a:hover { color: var(--gold); }
+
+  .form-box {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 3rem;
+  }
+  .form-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .form-box > p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .field { margin-bottom: 1.2rem; }
+  .field label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  .field textarea { resize: vertical; min-height: 120px; }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover {
+    background: var(--gold-light);
+    box-shadow: 0 10px 30px rgba(201,169,97,0.3);
+  }
+  .success-msg {
+    display: none;
+    padding: 1rem;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 4px;
+    color: #22c55e;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  .success-msg.show { display: block; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 5rem 3rem 2rem;
+    background: var(--bg-alt);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+  }
+  .foot-brand .brand { margin-bottom: 1.2rem; }
+  .foot-brand .brand img {
+    width: 56px;
+    height: 56px;
+  }
+  .foot-brand p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    max-width: 320px;
+  }
+  .foot-tags {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .foot-tags span {
+    padding: 0.4rem 0.8rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .foot-col h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .foot-col ul { list-style: none; }
+  .foot-col li { margin-bottom: 0.8rem; }
+  .foot-col a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  .foot-col a:hover { color: var(--gold); }
+  .foot-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    color: var(--text-mute);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .socials { display: flex; gap: 0.8rem; }
+  .socials a {
+    width: 40px; height: 40px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .socials a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--bg);
+    transform: translateY(-3px);
+  }
+
+  /* ---------- REVEAL ANIMATION ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 968px) {
+    section { padding: 5rem 1.5rem; }
+    .navbar { padding: 1rem 1.5rem; }
+    .navbar.scrolled { padding: 0.8rem 1.5rem; }
+    .menu { display: none; }
+    .burger { display: block; }
+    .about-wrap { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .certs-grid, .markets-grid { grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    .featured { aspect-ratio: auto; }
+    .featured-overlay { padding: 2rem; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-bottom { flex-direction: column; text-align: center; }
+    .field-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .hero-inner { padding: 0 1.5rem; }
+    .hero-logo { width: 90px; height: 90px; }
+    .hero-actions { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .stats-row { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .form-box { padding: 1.5rem; }
+    .products-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- MOBILE MENU ---------- */
+  .mobile-menu {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 85%;
+    max-width: 400px;
+    height: 100vh;
+    background: var(--bg-alt);
+    z-index: 200;
+    padding: 5rem 2rem;
+    transition: right 0.4s ease;
+    border-left: 1px solid var(--border);
+  }
+  .mobile-menu.open { right: 0; }
+  .mobile-menu ul { list-style: none; }
+  .mobile-menu li { margin-bottom: 1.5rem; }
+  .mobile-menu a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .close-menu {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .overlay.open { opacity: 1; pointer-events: all; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <a href="#home" class="brand">
+    <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1ee276a15-1536-484f-a927-07556c319c5c.png" alt="KIF PLUS">
+    <span>KIF PLUS</span>
+  </a>
+  <ul class="menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="cta-btn" onclick="scrollTo('#contact')">Trade Enquiry</button>
+  <button class="burger" onclick="openMenu()">☰</button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-menu" onclick="closeMenu()">✕</button>
+  <ul>
+    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#certifications" onclick="closeMenu()">Certifications</a></li>
+    <li><a href="#products" onclick="closeMenu()">Products</a></li>
+    <li><a href="#markets" onclick="closeMenu()">Markets</a></li>
+    <li><a href="#why" onclick="closeMenu()">Why Us</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1ee276a15-1536-484f-a927-07556c319c5c.png" alt="KIF PLUS" class="hero-logo">
+    <div class="hero-tag">
+      <span class="pulse"></span>
+      <span>Affiliated with Tobacco Board of India • Est. 2023</span>
+    </div>
+    <h1>
+      <span>Premium</span>
+      <span><em>Tobacco</em> & Shisha</span>
+      <span>Co.</span>
+    </h1>
+    <p>Your global partner for premium tobacco products & shisha flavors. Crafted with precision, delivered with excellence. MSME Zed Certified for zero-defect quality.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="scrollTo('#products')">Explore Products →</button>
+      <button class="btn btn-ghost" onclick="scrollTo('#contact')">Get in Touch</button>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Premium Tobacco <span class="star">✦</span> Shisha Flavors <span class="star">✦</span> Global Export <span class="star">✦</span> MSME Zed Certified <span class="star">✦</span> Pune, India <span class="star">✦</span> ISO 9001:2015 <span class="star">✦</span> Since 2023 <span class="star">✦</span></span>
+    <span>Premium Tobacco <span class="star">✦</span> Shisha Flavors <span class="star">✦</span> Global Export <span class="star">✦</span> MSME Zed Certified <span class="star">✦</span> Pune, India <span class="star">✦</span> ISO 9001:2015 <span class="star">✦</span> Since 2023 <span class="star">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-visual reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/10ca24557-89e2-4c1d-a95b-1e02f226388b.png" alt="Craftsman">
+      <div class="about-float">
+        <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1f76e7dda-84a9-412f-af3b-97064ce48abe.png" alt="Heritage">
+      </div>
+    </div>
+    <div class="about-body reveal">
+      <span class="eyebrow left">About KIF Plus</span>
+      <h2>Decades of mastery. One obsession: <em>perfection.</em></h2>
+      <p>KIF PLUS is a premium manufacturer & exporter of tobacco products and shisha flavors, dedicated to delivering world-class quality to markets across the globe.</p>
+      <p>With decades of experience in sourcing, processing, and distributing tobacco, we've built a reputation for unwavering reliability, exceptional consistency, and commitment to the highest industry standards.</p>
+      <p>Our end-to-end process — from meticulous sourcing and advanced processing to efficient worldwide distribution — establishes KIF PLUS as a trusted partner, renowned for reliability, consistency, and uncompromising standards.</p>
+      <div class="stats-row">
+        <div>
+          <div class="stat-num">2023</div>
+          <div class="stat-label">Tobacco Board Affiliation</div>
+        </div>
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years of Expertise</div>
+        </div>
+        <div>
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Countries Served</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Quality Assured</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="certs-section">
+  <div class="section-head reveal">
+    <span class="eyebrow">Certifications & Affiliations</span>
+    <h2 class="title">Certified excellence. <em>Verified trust.</em></h2>
+    <p class="lead">Our credentials speak louder than words. Recognized by the highest industry bodies for quality, safety, and compliance.</p>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-box reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1130b5b3e-65f4-4524-9144-1051ba798698.png" alt="Tobacco Board" class="cert-img">
+      <h3>Tobacco Board of India</h3>
+      <div class="sub">Officially Affiliated</div>
+      <p>Registered and affiliated with the Tobacco Board of India, ensuring compliance with national standards and regulations for tobacco production and export.</p>
+    </div>
+    <div class="cert-box reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/100991e1e-95f6-40a4-b907-140436690658.png" alt="ISO 9001" class="cert-img">
+      <h3>ISO 9001:2015</h3>
+      <div class="sub">Quality Management</div>
+      <p>Internationally certified for quality management systems. Our processes meet the highest global benchmarks for consistency and excellence.</p>
+    </div>
+    <div class="cert-box reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1b3c80276-3fc3-4469-b556-4d59dc89656d.png" alt="MSME ZED" class="cert-img">
+      <h3>MSME ZED Certified</h3>
+      <div class="sub">Zero Defect • Zero Effect</div>
+      <p>Recognized under the Government of India's ZED scheme for zero-defect manufacturing and zero environmental impact. Quality without compromise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-head reveal">
+    <span class="eyebrow">Our Products</span>
+    <h2 class="title">The lineup. All bangers, no fillers.</h2>
+    <p class="lead">Three signature products, each crafted with uncompromising attention to quality and consistency.</p>
+  </div>
+  <div class="products-grid">
+    <div class="product reveal">
+      <div class="product-pic">
+        <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/183001765-fd3d-4be2-914f-b99a551c1c67.png" alt="Pandarpuri Tobacco">
+        <span class="product-tag">Signature</span>
+      </div>
+      <div class="product-info">
+        <h3>Pandarpuri Tobacco</h3>
+        <p>Heritage-grade tobacco, carefully cured and blended for a smooth, authentic experience. The one that started it all.</p>
+        <a href="#contact" class="product-link">Enquire Now →</a>
+      </div>
+    </div>
+    <div class="product reveal">
+      <div class="product-pic">
+        <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1facbe008-96b7-4abf-a37b-db27aa866ed5.png" alt="Hukshah Shisha">
+        <span class="product-tag">Premium</span>
+      </div>
+      <div class="product-info">
+        <h3>Hukshah Shisha Flavor</h3>
+        <p>Premium French Molasses shisha tobacco. Bold, rich, unforgettable. Crafted with precision for enthusiasts who know the vibe.</p>
+        <a href="#contact" class="product-link">Enquire Now →</a>
+      </div>
+    </div>
+    <div class="product reveal">
+      <div class="product-pic">
+        <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1e78b0ebf-8708-4e04-80f4-4b4f4db1487b.png" alt="Coconut Charcoal">
+        <span class="product-tag">Essential</span>
+      </div>
+      <div class="product-info">
+        <h3>Finest Coconut Charcoal</h3>
+        <p>1KG pack • 72 PCS • 2.5×2.5×2.5 CM. Long-burning, low-ash, consistent heat. The perfect companion to elevate every session.</p>
+        <a href="#contact" class="product-link">Enquire Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section style="padding: 4rem 3rem;">
+  <div class="featured reveal">
+    <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1f76e7dda-84a9-412f-af3b-97064ce48abe.png" alt="Heritage">
+    <div class="featured-overlay">
+      <div class="featured-text">
+        <span class="eyebrow left">Heritage · Craftsmanship · Excellence</span>
+        <h2>From sourcing to shipment — uncompromising quality at every step.</h2>
+        <p>Our end-to-end process ensures that every product that leaves our facility meets the highest global standards. Trusted by partners in 50+ countries.</p>
+        <button class="btn btn-gold" onclick="scrollTo('#contact')">Become a Partner →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets" class="markets-section">
+  <div class="section-head reveal">
+    <span class="eyebrow">Global Markets</span>
+    <h2 class="title">Exporting excellence <em>worldwide.</em></h2>
+    <p class="lead">Proudly serving premium markets across the Middle East and South Asia, with a growing global footprint.</p>
+  </div>
+  <div class="markets-grid">
+    <div class="market-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/10889dec8-a25a-4194-a23b-ba7583213635.png" alt="UAE" class="flag">
+      <h3>United Arab Emirates</h3>
+      <div class="sub">Dubai • Abu Dhabi • Sharjah</div>
+      <p>A key market for our premium shisha flavors and tobacco products, serving the vibrant hospitality and retail sectors.</p>
+    </div>
+    <div class="market-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/11d4b68e5-034f-4af4-944f-ce8d4f80c96b.png" alt="Saudi Arabia" class="flag">
+      <h3>Saudi Arabia</h3>
+      <div class="sub">Riyadh • Jeddah • Dammam</div>
+      <p>Expanding presence across the Kingdom, delivering premium tobacco products to discerning consumers and distributors.</p>
+    </div>
+    <div class="market-card reveal">
+      <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1cc97bdb3-ef4e-4550-b1bb-6943c951e1a0.png" alt="India" class="flag">
+      <h3>India</h3>
+      <div class="sub">Pune • Mumbai • Delhi</div>
+      <p>Our home base and largest market. Headquartered in Pune, we serve distributors and retailers across the nation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="section-head reveal">
+    <span class="eyebrow">Why Partner With Us</span>
+    <h2 class="title">Built different. Certified elite.</h2>
+    <p class="lead">Four pillars that define our commitment to excellence and set us apart in the global market.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">💎</div>
+      <h3>Unmatched Quality</h3>
+      <p>Premium-grade products that meet the highest industry standards. MSME Zed & ISO Certified for zero-defect manufacturing.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">🏆</div>
+      <h3>Years of Expertise</h3>
+      <p>Decades of mastery in sourcing, processing, and global distribution. Deep industry knowledge built over generations.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">🤝</div>
+      <h3>Proven Reliability</h3>
+      <p>Consistent on-time delivery. Trust built through performance and long-term partnerships with clients worldwide.</p>
+    </div>
+    <div class="why-card reveal">
+      <div class="why-icon">🌍</div>
+      <h3>Global Reach</h3>
+      <p>Efficient worldwide distribution network. Quality wherever you are, with seamless logistics and customs expertise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: var(--bg-alt); border-top: 1px solid var(--border);">
+  <div class="contact-wrap">
+    <div class="contact-info reveal">
+      <span class="eyebrow left">Get In Touch</span>
+      <h2>Let's link up. <em>Slide into our inbox.</em></h2>
+      <p>For trade enquiries, bulk orders, or partnerships — we respond within 24 hours. Based in Pune, serving the world.</p>
+      <div class="contact-list">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <h4>Email Us</h4>
+            <a href="mailto:info@kifplus.com">info@kifplus.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <h4>Trade Enquiries</h4>
+            <a href="tel:+918999997786">+91 89999 97786</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <h4>Headquarters</h4>
+            <span>Pune, Maharashtra, India</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <h4>Business Hours</h4>
+            <span>Mon – Sat • 10:00 AM – 7:00 PM IST</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-box reveal">
+      <h3>Send us a message</h3>
+      <p>We'll get back to you within 24 hours.</p>
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="field-row">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label>Email Address</label>
+            <input type="email" required placeholder="you@company.com">
+          </div>
+        </div>
+        <div class="field">
+          <label>Interested In</label>
+          <select required>
+            <option value="">Select a product</option>
+            <option>Pandarpuri Tobacco</option>
+            <option>Hukshah Shisha Flavor</option>
+            <option>Hukshah Coconut Charcoal</option>
+            <option>Partnership / Bulk Order</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Message</label>
+          <textarea required placeholder="Tell us about your requirements..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message →</button>
+        <div class="success-msg" id="successMsg">✓ Message sent! We'll get back to you within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <a href="#home" class="brand">
+        <img src="https://image.qwenlm.ai/public_source/2b1091d5-123a-4e4f-9839-14fcee6c555c/1ee276a15-1536-484f-a927-07556c319c5c.png" alt="KIF PLUS">
+        <span>KIF PLUS</span>
+      </a>
+      <p>A premium tobacco manufacturer & exporter affiliated with the Tobacco Board of India since 2023. Crafting excellence, delivering globally.</p>
+      <div class="foot-tags">
+        <span>MSME Zed</span>
+        <span>ISO 9001:2015</span>
+        <span>Tobacco Board</span>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#markets">Markets</a></li>
+        <li><a href="#why">Why Us</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#products">Pandarpuri Tobacco</a></li>
+        <li><a href="#products">Hukshah Shisha Flavor</a></li>
+        <li><a href="#products">Hukshah Coconut Charcoal</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@kifplus.com">info@kifplus.com</a></li>
+        <li><a href="tel:+918999997786">+91 89999 97786</a></li>
+        <li><a href="#">Pune, Maharashtra, India</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KIF PLUS. All rights reserved. • Tobacco Board of India • MSME Zed • ISO 9001:2015</span>
+    <div class="socials">
+      <a href="#" aria-label="Instagram">IG</a>
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="WhatsApp">WA</a>
+      <a href="#" aria-label="LinkedIn">IN</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // navbar background on scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // smooth scroll helper
+  function scrollTo(selector) {
+    const el = document.querySelector(selector);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // mobile menu
+  function openMenu() {
+    document.getElementById('mobileMenu').classList.add('open');
+    document.getElementById('overlay').classList.add('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  // reveal on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // form submit
+  function submitForm(e) {
+    e.preventDefault();
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('successMsg');
+    msg.classList.add('show');
+    form.reset();
+    setTimeout(() => msg.classList.remove('show'), 4000);
+  }
+
+  // subtle parallax on hero background
+  const heroBg = document.querySelector('.hero-bg');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    if (heroBg && scrolled < window.innerHeight) {
+      heroBg.style.transform = `scale(${1 + scrolled * 0.0003}) translateY(${scrolled * 0.3}px)`;
+    }
+  });
+
+  // anchor links smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      scrollTo(href);
+    });
+  });
+</script>
+
+</body>
+</html>
+
